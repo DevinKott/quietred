@@ -1,28 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Helmet from 'react-helmet'
-import axios from 'axios'
-import stuff from './stuff.json'
 import snoowrap from 'snoowrap'
+import config from './config'
+
+const r = new snoowrap(
+  {
+    userAgent: 'desktop:com.devinkott.quietred:v0.0.1 (by Devin Kott)',
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    username: config.redditUser,
+    password: config.redditPass
+  }
+);
 
 function QuietRed() {
   const [links, setLinks] = useState([]);
 
   useEffect(
     () => {
-      const tempLinks = stuff.links.map(link => {
-        return {
-          title: link.title,
-          link: link.link
-        };
+      r.getSubreddit('All').getHot({amount: 100}).then(posts => {
+        console.log(posts);
+        let tempLinks = [];
+        posts.forEach((post, index) => {
+          tempLinks.push(
+            {
+              title: post.title,
+              link: post.url,
+              subreddit: post.subreddit_name_prefixed,
+              nsfw: post.over_18,
+              id: index
+            }
+          );
+        });
+        setLinks(tempLinks)
       });
-      setLinks(tempLinks);
-
-      axios.get('https://oauth.reddit.com/grants/installed_client').then(
-        resp => {
-          console.log(resp);
-        }
-      );
     },
     []
   );
@@ -46,7 +58,7 @@ function QuietRed() {
           {
             links.length === 0 &&
             <div>
-              There are currently no links to display.
+              There are currently no links to display. We are either loading or failed to retrieve posts.
             </div>
           }
           {
@@ -56,7 +68,7 @@ function QuietRed() {
                 links.map(link => {
                   return (
                     <ListItem
-                      key={link.title}
+                      key={'post-' + link.id}
                     >
                       <a
                         href={link.link}
@@ -65,6 +77,12 @@ function QuietRed() {
                       >
                         {link.title}
                       </a>
+                      {' '}
+                      ({link.subreddit})
+                      {
+                        link.nsfw ? <NSFWTag>{' '}(NSFW)</NSFWTag> : <span></span>
+                      }
+                      
                     </ListItem>
                   );
                 })
@@ -77,6 +95,10 @@ function QuietRed() {
     </Root>
   );
 }
+
+const NSFWTag = styled.span`
+  color: red;
+`
 
 const ListItem = styled.li`
   margin-bottom: 1em;
