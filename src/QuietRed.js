@@ -1,22 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Helmet from 'react-helmet'
-import snoowrap from 'snoowrap'
-import config from './config'
+import axios from 'axios';
 
-/**
- * This constant variable is an instance of snoowrap, which allows us to
- * login to Reddit and grab links/titles
- */
-const r = new snoowrap(
-  {
-    userAgent: 'desktop:com.devinkott.quietred:v0.0.1 (by Devin Kott)',
-    clientId: config.clientId,
-    clientSecret: config.clientSecret,
-    username: config.redditUser,
-    password: config.redditPass
-  }
-);
+const LINK = 'https://www.reddit.com/r/all.json';
 
 /**
  * Since this application is so small, the QuietRed function
@@ -33,20 +20,26 @@ function QuietRed() {
    */
   useEffect(
     () => {
-      r.getSubreddit('All').getHot().then(posts => {
-        let tempLinks = [];
-        posts.forEach((post, index) => {
-          tempLinks.push(
-            {
-              title: post.title,
-              link: post.url,
-              subreddit: post.subreddit_name_prefixed,
-              nsfw: post.over_18,
-              id: index
-            }
-          );
-        });
-        setLinks(tempLinks)
+      axios.get(LINK).then(resp => {
+        if (resp !== null && resp.data !== null && resp.data.data !== null) {
+          const data = resp.data.data;
+          const posts = data.children;
+          if (posts !== null && posts.length > 0) {
+            let tempLinks = [];
+            posts.forEach((p, index) => {
+              tempLinks.push(
+                {
+                  title: p.data.title,
+                  link: p.data.url,
+                  subreddit: p.data.subreddit_name_prefixed,
+                  nsfw: p.data.over_18,
+                  id: index
+                }
+              );
+            });
+            setLinks(tempLinks);
+          }
+        }
       });
     },
     []
@@ -136,6 +129,14 @@ const Links = styled.div`
 // Make the title big!
 const Title = styled.div`
   font-size: 4em;
+
+  @media (max-width: 750px) {
+    font-size: 3em;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 2.5em;
+  }
 `
 
 // Center the main application
@@ -145,6 +146,14 @@ const Application = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1300px) {
+    width: 80%;
+  }
+
+  @media (max-width: 750px) {
+    width: 90%;
+  }
 `
 
 // Global settings not overridden by
@@ -157,8 +166,16 @@ const Root = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 2em;
   font-size: 1.2em;
+
+  @media (max-width: 770px) {
+    font-size: 1em;
+    padding: 0em;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 0.8em;
+  }
 `
 
 export default QuietRed;
