@@ -1,5 +1,6 @@
 {
-  "name": "quietreddit",
+  "name": "QuietRed",
+  "description": "Similar to QuietHN, this website displays the titles and links of the top 25 posts in r/all for that time. ",
   "version": "0.1.0",
   "author": "Devin Kott <devin.kott@gmail.com>",
   "private": true,

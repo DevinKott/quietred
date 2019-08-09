@@ -19,8 +19,7 @@ function QuietRed() {
 
   useEffect(
     () => {
-      r.getSubreddit('All').getHot({amount: 100}).then(posts => {
-        console.log(posts);
+      r.getSubreddit('All').getHot().then(posts => {
         let tempLinks = [];
         posts.forEach((post, index) => {
           tempLinks.push(
@@ -51,7 +50,7 @@ function QuietRed() {
       
       <Application>
         <Title>
-          QuietRed
+        QuietRed
         </Title>
 
         <Links>
@@ -133,7 +132,7 @@ const Root = styled.div`
   justify-content: center;
 
   padding: 2em;
-  font-size: 1em;
+  font-size: 1.2em;
 `
 
 export default QuietRed;
