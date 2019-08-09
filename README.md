@@ -28,3 +28,4 @@ Once everything has installed, run `yarn start`.
 - Add in filters such as `show only pictures`, `show only news`
 - Have an option to hide viewed links, or move them to a separate space
 - Change the favicon to something else.
+- Make sure the site is responsive on mobile devices and smaller screens in general.
