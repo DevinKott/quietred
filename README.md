@@ -13,10 +13,7 @@ NSFW posts should be tagged accordingly.
 
 ## How to build
 
-Clone this repository and create a file called `config.js` inside the `src` directory. Export `clientId`, `clientSecret`, `redditUser`, and `redditPass`.
-Create a new reddit account and create a developer application.
-Use the account's username, password, and application id and secret to fill in the values.
-Please change the useragent used to login and use the Reddit API.
+Clone this repository.
 
 Once that is done, run `yarn` in the top-level directory to install node modules.
 Once everything has installed, run `yarn start`.
@@ -24,8 +21,8 @@ Once everything has installed, run `yarn start`.
 
 ## Future Features
 
-- Fetch posts on my API and then pull from there. That way, I can set limits to how much my test account pulls from the Reddit API. I would also feel better since publishing this application as-is would give everyone the ability to use this dev Reddit account that I just made.
+- ~~Fetch posts on my API and then pull from there. That way, I can set limits to how much my test account pulls from the Reddit API. I would also feel better since publishing this application as-is would give everyone the ability to use this dev Reddit account that I just made.~~
 - Add in filters such as `show only pictures`, `show only news`
 - Have an option to hide viewed links, or move them to a separate space
 - Change the favicon to something else.
-- Make sure the site is responsive on mobile devices and smaller screens in general.
+- ~~Make sure the site is responsive on mobile devices and smaller screens in general.~~
