@@ -1,68 +1,30 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# QuietRed
 
-In the project directory, you can run:
+This project was inspirated by [QuietHN](https://quiethn.com/), which is a site focused on only provided the current Hacker News posts' links without the comment section.
+QuietRed is similar, but shows the current Reddit top posts.
 
-### `npm start`
+On every refresh, the current top 25 posts of r/all are scraped and provided as links.
+Each link is opened in a new tab.
+While some links point back to the commend section of the reddit post (mostly videos uploaded through Reddit), most lead to external news sites or pictures.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+NSFW posts should be tagged accordingly.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## How to build
 
-### `npm test`
+Clone this repository and create a file called `config.js` inside the `src` directory. Export `clientId`, `clientSecret`, `redditUser`, and `redditPass`.
+Create a new reddit account and create a developer application.
+Use the account's username, password, and application id and secret to fill in the values.
+Please change the useragent used to login and use the Reddit API.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once that is done, run `yarn` in the top-level directory to install node modules.
+Once everything has installed, run `yarn start`.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Future Features
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Fetch posts on my API and then pull from there. That way, I can set limits to how much my test account pulls from the Reddit API. I would also feel better since publishing this application as-is would give everyone the ability to use this dev Reddit account that I just made.
+- Add in filters such as `show only pictures`, `show only news`
+- Have an option to hide viewed links, or move them to a separate space
+- Change the favicon to something else.
