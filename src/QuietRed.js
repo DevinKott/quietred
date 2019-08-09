@@ -101,11 +101,25 @@ function QuietRed() {
             </ol>
           }
         </Links>
+
+        <Footer>
+          © <NoStyleLink href='https://devinkott.com/'>Devin Kott</NoStyleLink> 2019.
+          All rights reserved | <NoStyleLink href='https://github.com/DevinKott/quietred'>View Source</NoStyleLink>
+        </Footer>
       </Application>
 
     </Root>
   );
 }
+
+const NoStyleLink = styled.a`
+  text-decoration: underline;
+  color: black;
+`
+
+const Footer = styled.div`
+  padding-bottom: 2em;
+`
 
 // We want the NSFW tag to be highly visible.
 const NSFWTag = styled.span`
