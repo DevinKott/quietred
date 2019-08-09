@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4a18c64c-b056-48f1-a211-61b0defadbec/deploy-status)](https://app.netlify.com/sites/peaceful-hugle-081007/deploys)
+
 # QuietRed
 
 This project was inspirated by [QuietHN](https://quiethn.com/), which is a site focused on only provided the current Hacker News posts' links without the comment section.
